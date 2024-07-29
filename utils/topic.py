@@ -10,7 +10,7 @@ import streamlit as st
 
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=5)
 def downloads_nlp():
-    spacy.cli.download("en_core_web_lg")
+    spacy.cli.download("pt_core_news_sm")
     nlp = spacy.load('pt_core_news_sm')
 
     return nlp
