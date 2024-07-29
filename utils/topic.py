@@ -6,7 +6,6 @@ import numpy as np
 from unidecode import unidecode
 import spacy.cli
 from sklearn.feature_extraction.text import TfidfVectorizer
-import pt_core_news_sm
 import streamlit as st
 
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=5)
