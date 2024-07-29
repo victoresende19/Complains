@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import nltk
+import spacy.cli
 from utils.topic import normalize, lemanization, tfidf_processing
 from utils.style import style
 from utils.plots import bar_plot
