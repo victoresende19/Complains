@@ -5,14 +5,17 @@ import string
 import numpy as np
 from unidecode import unidecode
 import spacy.cli
+from spacy.cli import download
 from sklearn.feature_extraction.text import TfidfVectorizer
 import streamlit as st
 
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=5)
 def downloads_nlp():
-    spacy.cli.download("pt_core_news_sm")
-    nlp = spacy.load('pt_core_news_sm')
-
+    try:
+        nlp = spacy.load('pt_core_news_sm')
+    except OSError:
+        download("pt_core_news_sm")
+        nlp = spacy.load('pt_core_news_sm')
     return nlp
 
 def normalize(df: pd.DataFrame, column: str):
