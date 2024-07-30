@@ -9,19 +9,16 @@ from unidecode import unidecode
 from sklearn.feature_extraction.text import TfidfVectorizer
 import streamlit as st
 
-# Baixar recursos do NLTK necessários
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-# Função para baixar e configurar recursos do NLP
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=5)
 def downloads_nlp():
     stop_words = set(stopwords.words('portuguese'))
     lemmatizer = WordNetLemmatizer()
     return stop_words, lemmatizer
 
-# Função para normalizar dados
 def normalize(df: pd.DataFrame, column: str):
     """
     Normalização dos dados: stopwords, lowercase e unidecode.
@@ -41,7 +38,6 @@ def normalize(df: pd.DataFrame, column: str):
 
     return df
 
-# Função para lematizar textos
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=50)
 def lemanization(text: list):
     """
@@ -56,7 +52,6 @@ def lemanization(text: list):
     lemmatized_tokens = [lemmatizer.lemmatize(word) for word in word_tokenize(text.lower()) if word.isalpha()]
     return ' '.join(lemmatized_tokens)
 
-# Função para processar TF-IDF
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=50)
 def tfidf_processing(sentences: list, gram: int):
     """

@@ -13,10 +13,14 @@ def style():
             background: #0000;
             color: #ffff !important;
         }
-        .st-dm, .st-d9, .e1i5pmia1, .e1q9reml1, .e1q9reml2  {
+        .e1811lun0{
+            background: black;
+            color: #ffff;
+        }
+        .st-dm, .st-d9, .e1i5pmia1, .e1q9reml1, .e1q9reml2{
             color: #fff
         }
-        div[data-testid="stMetric"] {
+        div[data-testid="stMetric"]{
             color: #fff;
             text-align: center;
             background-color:  rgba(100, 100, 100, 0.3);
