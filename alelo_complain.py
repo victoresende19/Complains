@@ -32,8 +32,8 @@ with st.spinner(f'Extraindo dados de {n_pages} reclamações do ReclameAqui - Al
         col1.metric("Quantidade de reclamações", f"{len(df)}".replace(',', '.'))
         col2.metric("Reclamações não respondidas", f"{len(df[df['Status'] == 'Não respondida']):,}".replace(',', '.'))
         col3.metric("Reclamações respondidas", f"{len(df[df['Status'] == 'Respondida']):,}".replace(',', '.'))
-        col4.metric("Reclamações resolvidas", f"{len(df[df['Status'] == 'Resolvido']):,}".replace(',', '.'))
-        col5.metric("Reclamações não resolvidas", f"{len(df[df['Status'] == 'Não resolvido']):,}".replace(',', '.'))
+        col4.metric("Reclamações não resolvidas", f"{len(df[df['Status'] == 'Não resolvido']):,}".replace(',', '.'))
+        col5.metric("Reclamações resolvidas", f"{len(df[df['Status'] == 'Resolvido']):,}".replace(',', '.'))
 
         st.write('')
         st.write('')
