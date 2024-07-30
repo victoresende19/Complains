@@ -83,4 +83,4 @@ with st.spinner(f'Extraindo dados de {n_pages} reclamações do ReclameAqui - Al
 
                 st.table(filtered_df)
 
-        st.table(df)
+            st.table(df)
