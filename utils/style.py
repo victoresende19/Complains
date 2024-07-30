@@ -13,7 +13,7 @@ def style():
             background: #0000;
             color: #ffff !important;
         }
-        .st-dm, .st-d9, .e1i5pmia1, .e1q9reml1, .e1q9reml2  {
+        .st-dm, .st-d9, .e1i5pmia1, .e1q9reml1, .e1q9reml2, .st-ag  {
             color: #ffff
         }
         div[data-testid="stMetric"] {
