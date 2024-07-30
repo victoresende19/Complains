@@ -9,7 +9,7 @@ def style():
         .stApp, .css-12ttj6m, .e8zbici2{
             background: linear-gradient(90deg, #1b5438 0%,  #0a6d3c 38%, #03381e 100%);
         }
-        .st-ay, .st-af, .ef3psqc7, .st-ag{
+        .st-ay, .st-af, .ef3psqc7{
             background: #0000;
             color: #ffff !important;
         }
