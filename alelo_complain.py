@@ -21,7 +21,7 @@ st.markdown(style(), unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: left; font-size:52px; color: white'>ReclameAqui - Alelo</h1>", unsafe_allow_html=True)
 st.markdown("""<p style='text-align: left; font-size:16px'>No Brasil, quando consumidores enfrentam problemas com empresas, frequentemente recorrem ao ReclameAqui para registrar suas reclamações. Esta aplicação permite explorar os tópicos mais reclamados sobre a Alelo, fornecendo acesso a dados detalhados, incluindo o teor das reclamações, status e links diretos para cada registro no <a href='https://www.reclameaqui.com.br/empresa/alelo/lista-reclamacoes/' target='_blank'>ReclameAqui - Alelo</a>.</p>""", unsafe_allow_html=True)
 topics_tab = st.tabs(["Tópicos com mais reclamações", "Reclamações"])
-n_pages = 500
+n_pages = 50
 
 with st.spinner(f'Extraindo dados de {n_pages} reclamações do ReclameAqui - Alelo. Isso pode levar alguns minutos...'):
     df = web_scrapping(range_pag=n_pages)
