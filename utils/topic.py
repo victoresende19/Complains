@@ -1,38 +1,47 @@
 import pandas as pd
 import nltk
-from nltk import word_tokenize, download
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
 import string
 import numpy as np
 from unidecode import unidecode
-import spacy.cli
-from spacy.cli import download
 from sklearn.feature_extraction.text import TfidfVectorizer
 import streamlit as st
 
+# Baixar recursos do NLTK necessários
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+# Função para baixar e configurar recursos do NLP
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=5)
 def downloads_nlp():
-    nlp = spacy.load('pt_core_news_sm')
-    return nlp
+    stop_words = set(stopwords.words('portuguese'))
+    lemmatizer = WordNetLemmatizer()
+    return stop_words, lemmatizer
 
+# Função para normalizar dados
 def normalize(df: pd.DataFrame, column: str):
     """
-    Normalizacao dos dados: stopwords, lowercase e unidecode.
+    Normalização dos dados: stopwords, lowercase e unidecode.
 
     Recebe:
         df: dataframe com os dados
     Retorna:
-        df['processed']: coluna do dataframe que passou por normalizacao
+        df['processed']: coluna do dataframe que passou por normalização
     """
+    stop_words, _ = downloads_nlp()
 
-    stopwords = nltk.corpus.stopwords.words('portuguese')
     palavras_extras = ['pra', 'pro', 'pq', 'https', 'etc', 'dão', 'após', 'apos', 'consigo']
-    stopwords = np.concatenate([stopwords, palavras_extras, list(string.punctuation)])
+    stop_words = stop_words.union(set(palavras_extras), set(string.punctuation))
 
     df['processed'] = df[column].apply(lambda x: ' '.join(
-        unidecode(word.lower()) for word in word_tokenize(x) if word.lower() not in stopwords))
+        unidecode(word.lower()) for word in word_tokenize(x) if word.lower() not in stop_words))
 
     return df
 
+# Função para lematizar textos
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=50)
 def lemanization(text: list):
     """
@@ -43,12 +52,11 @@ def lemanization(text: list):
     Retorna:
         texto lematizado como uma string
     """
-
-    nlp = downloads_nlp()
-    doc = nlp(text.lower())
-    lemmatized_tokens = [token.lemma_ for token in doc if token.is_alpha and not token.is_stop]
+    _, lemmatizer = downloads_nlp()
+    lemmatized_tokens = [lemmatizer.lemmatize(word) for word in word_tokenize(text.lower()) if word.isalpha()]
     return ' '.join(lemmatized_tokens)
 
+# Função para processar TF-IDF
 @st.cache_data(show_spinner=False, ttl=24*3600, max_entries=50)
 def tfidf_processing(sentences: list, gram: int):
     """
@@ -61,7 +69,6 @@ def tfidf_processing(sentences: list, gram: int):
     Retorna:
         df_rankeado: dataframe com termos e ranks ordenados
     """
-    
     vec_tdidf = TfidfVectorizer(ngram_range=(gram, gram))
     tfidf = vec_tdidf.fit_transform(sentences)
     features = vec_tdidf.get_feature_names_out()
