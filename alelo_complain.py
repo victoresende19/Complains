@@ -81,6 +81,5 @@ with st.spinner(f'Extraindo dados de {n_pages} reclamações do ReclameAqui - Al
                 if text_filter:
                     filtered_df = filtered_df[filtered_df['Texto'].str.contains(text_filter, case=False, na=False)]
 
-                st.table(filtered_df)
+            st.table(filtered_df)
 
-            st.table(df)
